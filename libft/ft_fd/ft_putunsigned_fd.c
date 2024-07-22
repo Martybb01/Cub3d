@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putunsigned_fd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/20 17:51:10 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/20 18:05:28 by fdonati          ###   ########.fr       */
+/*   Created: 2023/12/11 13:06:15 by fdonati           #+#    #+#             */
+/*   Updated: 2023/12/11 13:06:17 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int argc, char **argv, char **env)
+int	ft_putunsigned_fd(unsigned int n, int fd)
 {
-	t_env	*env;
-	t_cmd	*cmd;
+	int		print_length;
+	char	*num;
 
-	env = NULL;
-	cmd = NULL;
+	print_length = 0;
+	if (n == 0)
+		print_length += ft_putchar_fd('0', fd);
+	else
+	{
+		num = ft_uitoa(n);
+		print_length += ft_putstr_fd(num, fd);
+		free(num);
+	}
+	return (print_length);
 }
-
-//TODO: boh
