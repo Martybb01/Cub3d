@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:42:19 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/23 11:55:43 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/07/23 18:14:27 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,31 @@ void	ft_render_map(t_var *var)
 {
 	int	x;
 	int	y;
+	int mini_x;
+	int mini_y;
 
-	x = 0;
-	while (var->map.map[x])
+	y = -1;
+	while (++y < var->map.y)
 	{
-		y = 0;
-		while (var->map.map[x][y])
+		x = -1;
+		while (++x < (int )ft_strlen(var->map.map[y]))
 		{
-			if (var->map.map[x][y] == '1')
-				mlx_pixel_put(var->mlx, var->win, y, x, 0x00FF0000);
-			if (var->map.map[x][y] == '0')
-				mlx_pixel_put(var->mlx, var->win, y, x, 0x0000FF00);
-			y++;
+			mini_x = x * TILESIZE;
+			mini_y = y * TILESIZE;
+			int i = -1;
+			while (++i < TILESIZE)
+			{
+				int j = -1;
+				while (++j < TILESIZE)
+				{
+					if (var->map.map[y][x] == '1')
+						mlx_pixel_put(var->mlx, var->win, mini_x + j, mini_y + i, 0x00FF0000);
+					if (var->map.map[y][x] == '0')
+						mlx_pixel_put(var->mlx, var->win, mini_x + j, mini_y + i, 0x0000FF00);
+				}
+			}
 		}
-		x++;
 	}
-
 }
 
 int	ft_load_game(t_var *var)

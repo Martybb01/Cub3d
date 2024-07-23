@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:49:39 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/23 11:55:57 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/07/23 18:06:49 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,15 @@ void	ft_read_map(char *path, t_var *var)
 	char	*line;
 	char	*buffer;
 	int		i;
+	int width = 0;
+	int line_length;
+	int height = 0;
 
 	i = 0;
 	fd = open(path, O_RDONLY);
-	buffer = ft_strdup("");
 	if (fd == -1)
 		ft_error(3, var);
+	buffer = ft_strdup("");
 	while (1)
 	{
 		line = ft_get_next_line(fd);
@@ -46,10 +49,18 @@ void	ft_read_map(char *path, t_var *var)
 		if (ft_blank_line(line))
 			i++;
 		if (i > 6)
+		{
 			buffer = ft_strfjoin(buffer, line);
+			line_length = ft_strlen(line);
+			if (line_length > width)
+				width = line_length;
+			height++;
+		}
 		free(line);
 	}
 	close(fd);
 	var->map.map = ft_split(buffer, '\n');
 	free(buffer);
+	var->map.x = width;
+	var->map.y = height;
 }
