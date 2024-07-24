@@ -3,14 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:51:10 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/23 16:08:45 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/07/24 17:07:47 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_player_init(t_var *var)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < var->map.height)
+	{
+		j = -1;
+		while (++j < (int )ft_strlen(var->map.map[i]))
+		{
+			if (var->map.map[i][j] == 'N' || var->map.map[i][j] == 'S'
+				|| var->map.map[i][j] == 'E' || var->map.map[i][j] == 'W')
+			{
+				var->player.x = j * TILESIZE + TILESIZE / 2;
+				var->player.y = i * TILESIZE + TILESIZE / 2;
+				if (var->map.map[i][j] == 'N')
+					var->player.dir = 270;
+				if (var->map.map[i][j] == 'S')
+					var->player.dir = 90;
+				if (var->map.map[i][j] == 'E')
+					var->player.dir = 0;
+				if (var->map.map[i][j] == 'W')
+					var->player.dir = 180;
+				var->map.map[i][j] = '0';
+				return ;
+			}
+		}
+	}
+}
 
 void	ft_error(int error, t_var *var)
 {
@@ -37,8 +68,11 @@ int	main(int argc, char **argv)
 	var.win = mlx_new_window(var.mlx, 1280, 720, "cub3d");
 	if (!var.win)
 		ft_error(2, &var);
+	var.img.img = mlx_new_image(var.mlx, 1280, 720);
+	var.img.addr = mlx_get_data_addr(var.img.img, &var.img.bpp, &var.img.line_length, &var.img.endian);
 	ft_read_map(var.path, &var);
-	//ft_get_mapsize(var.map);
+	ft_player_init(&var);
+	mlx_hook(var.win, KeyPress, KeyPressMask, &ft_key_press, &var);
 	mlx_loop_hook(var.mlx, &ft_load_game, &var);
 	mlx_loop(var.mlx);
 }
