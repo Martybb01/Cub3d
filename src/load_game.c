@@ -6,7 +6,7 @@
 /*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:42:19 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/24 17:10:13 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/07/25 18:52:38 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,6 @@
 		i++;
 	}
 } */
-
-static void	ft_pixel_put(t_pimg *img, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	ft_render_tile(t_pimg *img, int x, int y, int color)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < TILESIZE)
-	{
-		j = -1;
-		while (++j < TILESIZE)
-			ft_pixel_put(img, x + j, y + i, color);
-	}
-}
 
 void	ft_render_map(t_var *var)
 {
@@ -70,28 +48,24 @@ void	ft_render_map(t_var *var)
 
 void	ft_render_dir(t_var *var)
 {
-	int	x;
-	int	y;
-	int	i;
-	int	j;
+	int		x;
+	int		y;
+	t_point	*pointv;
 
-	x = var->player.x;
-	y = var->player.y;
-	i = x + cos(var->player.dir * M_PI / 180) * TILESIZE;
-	j = y + sin(var->player.dir * M_PI / 180) * TILESIZE;
-	while (x != i || y != j)
-	{
-		ft_pixel_put(&var->img, x, y, RED);
-		x += cos(var->player.dir * M_PI / 180);
-		y += sin(var->player.dir * M_PI / 180);
-	}
+	x = var->player.point->x;
+	y = var->player.point->y;
+	pointv = malloc(sizeof(t_point *));
+	pointv->x = x + cos(var->player.dir * M_PI / 180) * TILESIZE;
+	pointv->y = y + sin(var->player.dir * M_PI / 180) * TILESIZE;
+	ft_draw_line(&var->img, var->player.point, pointv, BLACK);
+	free(pointv);
 }
 
 void	ft_render_player(t_var *var)
 {
+	ft_render_tile(&var->img, var->player.point->x - TILESIZE / 2,
+		var->player.point->y - TILESIZE / 2, RED);
 	ft_render_dir(var);
-	ft_render_tile(&var->img, var->player.x - TILESIZE / 2,
-		var->player.y - TILESIZE / 2, RED);
 }
 
 int	ft_load_game(t_var *var)

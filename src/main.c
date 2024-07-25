@@ -6,7 +6,7 @@
 /*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:51:10 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/24 17:07:47 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/07/25 17:21:53 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,17 @@ void	ft_player_init(t_var *var)
 			if (var->map.map[i][j] == 'N' || var->map.map[i][j] == 'S'
 				|| var->map.map[i][j] == 'E' || var->map.map[i][j] == 'W')
 			{
-				var->player.x = j * TILESIZE + TILESIZE / 2;
-				var->player.y = i * TILESIZE + TILESIZE / 2;
+				var->player.point = malloc(sizeof(t_point));
+				var->player.point->x = j * TILESIZE;
+				var->player.point->y = i * TILESIZE;
 				if (var->map.map[i][j] == 'N')
-					var->player.dir = 270;
-				if (var->map.map[i][j] == 'S')
 					var->player.dir = 90;
+				if (var->map.map[i][j] == 'S')
+					var->player.dir = 270;
 				if (var->map.map[i][j] == 'E')
-					var->player.dir = 0;
-				if (var->map.map[i][j] == 'W')
 					var->player.dir = 180;
+				if (var->map.map[i][j] == 'W')
+					var->player.dir = 0;
 				var->map.map[i][j] = '0';
 				return ;
 			}
@@ -60,6 +61,7 @@ int	main(int argc, char **argv)
 	t_var	var;
 
 	var.map = (t_map){0};
+	var.player = (t_plyr){0};
 	ft_check_file(argc, argv[1]);
 	var.path = argv[1];
 	var.mlx = mlx_init();
