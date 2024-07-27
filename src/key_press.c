@@ -6,7 +6,7 @@
 /*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:55:16 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/25 18:49:28 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/07/26 14:52:23 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,38 +21,38 @@ void	ft_move(t_var *var, int keycode)
 	delta_y = sin(var->player.dir * M_PI / 180) * SPEED;
 	if (keycode == W)
 	{
-		if (var->map.map[(int)(var->player.point->y + delta_y) / TILESIZE]
-			[(int)(var->player.point->x + delta_x) / TILESIZE] == '0')
+		if (var->map.map[(int)(var->player.point.y + delta_y) / TILESIZE]
+			[(int)(var->player.point.x + delta_x) / TILESIZE] == '0')
 		{
-			var->player.point->x += delta_x;
-			var->player.point->y += delta_y;
+			var->player.point.x += delta_x;
+			var->player.point.y += delta_y;
 		}
 	}
 	if (keycode == S)
 	{
-		if (var->map.map[(int)(var->player.point->y - delta_y) / TILESIZE]
-			[(int)(var->player.point->x - delta_x) / TILESIZE] == '0')
+		if (var->map.map[(int)(var->player.point.y - delta_y) / TILESIZE]
+			[(int)(var->player.point.x - delta_x) / TILESIZE] == '0')
 		{
-			var->player.point->x -= delta_x;
-			var->player.point->y -= delta_y;
+			var->player.point.x -= delta_x;
+			var->player.point.y -= delta_y;
 		}
 	}
 	if (keycode == A)
 	{
-		if (var->map.map[(int)(var->player.point->y - delta_x) / TILESIZE]
-			[(int)(var->player.point->x + delta_y) / TILESIZE] == '0')
+		if (var->map.map[(int)(var->player.point.y - delta_x) / TILESIZE]
+			[(int)(var->player.point.x + delta_y) / TILESIZE] == '0')
 		{
-			var->player.point->x += delta_y;
-			var->player.point->y -= delta_x;
+			var->player.point.x += delta_y;
+			var->player.point.y -= delta_x;
 		}
 	}
 	if (keycode == D)
 	{
-		if (var->map.map[(int)(var->player.point->y + delta_x) / TILESIZE]
-			[(int)(var->player.point->x - delta_y) / TILESIZE] == '0')
+		if (var->map.map[(int)(var->player.point.y + delta_x) / TILESIZE]
+			[(int)(var->player.point.x - delta_y) / TILESIZE] == '0')
 		{
-			var->player.point->x -= delta_y;
-			var->player.point->y += delta_x;
+			var->player.point.x -= delta_y;
+			var->player.point.y += delta_x;
 		}
 	}
 }

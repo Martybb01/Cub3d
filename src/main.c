@@ -6,7 +6,7 @@
 /*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:51:10 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/25 17:21:53 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/07/26 15:15:42 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ void	ft_player_init(t_var *var)
 			if (var->map.map[i][j] == 'N' || var->map.map[i][j] == 'S'
 				|| var->map.map[i][j] == 'E' || var->map.map[i][j] == 'W')
 			{
-				var->player.point = malloc(sizeof(t_point));
-				var->player.point->x = j * TILESIZE;
-				var->player.point->y = i * TILESIZE;
+				var->player.point.x = j * TILESIZE;
+				var->player.point.y = i * TILESIZE;
 				if (var->map.map[i][j] == 'N')
 					var->player.dir = 90;
 				if (var->map.map[i][j] == 'S')
