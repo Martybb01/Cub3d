@@ -6,7 +6,7 @@
 /*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:51:10 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/26 15:15:42 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/07/27 13:58:58 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ int	main(int argc, char **argv)
 	var.mlx = mlx_init();
 	if (!var.mlx)
 		ft_error(2, &var);
-	var.win = mlx_new_window(var.mlx, 1280, 720, "cub3d");
+	var.win = mlx_new_window(var.mlx, WIDTH, HEIGHT, "cub3d");
 	if (!var.win)
 		ft_error(2, &var);
-	var.img.img = mlx_new_image(var.mlx, 1280, 720);
+	var.img.img = mlx_new_image(var.mlx, WIDTH, HEIGHT);
 	var.img.addr = mlx_get_data_addr(var.img.img, &var.img.bpp, &var.img.line_length, &var.img.endian);
 	ft_read_map(var.path, &var);
 	ft_player_init(&var);
