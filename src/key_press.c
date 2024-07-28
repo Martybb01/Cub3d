@@ -6,56 +6,11 @@
 /*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:55:16 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/26 14:52:23 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/07/28 17:14:30 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	ft_move(t_var *var, int keycode)
-{
-	double	delta_x;
-	double	delta_y;
-
-	delta_x = cos(var->player.dir * M_PI / 180) * SPEED;
-	delta_y = sin(var->player.dir * M_PI / 180) * SPEED;
-	if (keycode == W)
-	{
-		if (var->map.map[(int)(var->player.point.y + delta_y) / TILESIZE]
-			[(int)(var->player.point.x + delta_x) / TILESIZE] == '0')
-		{
-			var->player.point.x += delta_x;
-			var->player.point.y += delta_y;
-		}
-	}
-	if (keycode == S)
-	{
-		if (var->map.map[(int)(var->player.point.y - delta_y) / TILESIZE]
-			[(int)(var->player.point.x - delta_x) / TILESIZE] == '0')
-		{
-			var->player.point.x -= delta_x;
-			var->player.point.y -= delta_y;
-		}
-	}
-	if (keycode == A)
-	{
-		if (var->map.map[(int)(var->player.point.y - delta_x) / TILESIZE]
-			[(int)(var->player.point.x + delta_y) / TILESIZE] == '0')
-		{
-			var->player.point.x += delta_y;
-			var->player.point.y -= delta_x;
-		}
-	}
-	if (keycode == D)
-	{
-		if (var->map.map[(int)(var->player.point.y + delta_x) / TILESIZE]
-			[(int)(var->player.point.x - delta_y) / TILESIZE] == '0')
-		{
-			var->player.point.x -= delta_y;
-			var->player.point.y += delta_x;
-		}
-	}
-}
 
 void	ft_rotate(t_var *var, int keycode)
 {
