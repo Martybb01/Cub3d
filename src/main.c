@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:51:10 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/27 13:58:58 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/07/28 19:45:50 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(int argc, char **argv)
 	var.img.addr = mlx_get_data_addr(var.img.img, &var.img.bpp, &var.img.line_length, &var.img.endian);
 	ft_read_map(var.path, &var);
 	ft_player_init(&var);
-	mlx_hook(var.win, KeyPress, KeyPressMask, &ft_key_press, &var);
+	mlx_hook(var.win, 2, 1L << 0, &ft_key_press, &var);
 	mlx_loop_hook(var.mlx, &ft_load_game, &var);
 	mlx_loop(var.mlx);
 }

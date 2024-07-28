@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:49:39 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/24 15:49:11 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/07/27 10:28:48 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_blank_line(char *line)
 	return (0);
 }
 
-void	ft_read_map(char *path, t_var *var)
+int	ft_read_map(char *path, t_var *var)
 {
 	int		fd;
 	char	*line;
@@ -59,4 +59,5 @@ void	ft_read_map(char *path, t_var *var)
 	close(fd);
 	var->map.map = ft_split(buffer, '\n');
 	free(buffer);
+	return (0);
 }
