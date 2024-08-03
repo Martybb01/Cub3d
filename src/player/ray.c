@@ -6,35 +6,79 @@
 /*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:02:28 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/27 12:50:45 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/08/03 16:34:30 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_ray(t_var *var, int angle)
+t_point	ft_ray_delta(t_var *var, double ray_angle)
 {
-	double	delta_x;
-	double	delta_y;
-	t_point	point;
-	int		new_angle;
+	double	dir_angle;
+	t_point	delta_point;
 
-	new_angle = var->player.dir + angle;
-	while (new_angle < 0)
-		new_angle += 360;
-	while (new_angle > 360)
-		new_angle -= 360;
-	delta_x = cos(new_angle * M_PI / 180);
-	delta_y = sin(new_angle * M_PI / 180);
-	point.x = var->player.point.x;
-	point.y = var->player.point.y;
-	while (var->map.map[(int)point.y / TILESIZE]
-		[(int)point.x / TILESIZE] != '1')
+	dir_angle = var->player.dir + ray_angle;
+	while (dir_angle < 0)
+		dir_angle += 360;
+	while (dir_angle > 360)
+		dir_angle -= 360;
+	delta_point.x = cos(dir_angle * M_PI / 180);
+	delta_point.y = sin(dir_angle * M_PI / 180);
+	return (delta_point);
+}
+
+t_side	ft_ray_side_x(t_point delta_point)
+{
+	if (delta_point.x > 0)
+		return (EAST);
+	else
+		return (WEST);
+}
+
+t_side	ft_ray_side_y(t_point delta_point)
+{
+	if (delta_point.y > 0)
+		return (SOUTH);
+	else
+		return (NORTH);
+}
+
+t_point	ft_ray_hit(t_var *var, t_point delta_point, t_ray *ray)
+{
+	t_point	hit_point;
+
+	hit_point.x = var->player.point.x;
+	hit_point.y = var->player.point.y;
+	while (1)
 	{
-		point.x += delta_x;
-		point.y += delta_y;
+		hit_point.x += delta_point.x;
+		if (var->map.map[(int)hit_point.y / TILESIZE]
+			[(int)hit_point.x / TILESIZE] == '1')
+		{
+			ray->side = ft_ray_side_x(delta_point);
+			break ;
+		}
+		hit_point.y += delta_point.y;
+		if (var->map.map[(int)hit_point.y / TILESIZE]
+			[(int)hit_point.x / TILESIZE] == '1')
+		{
+			ray->side = ft_ray_side_y(delta_point);
+			break ;
+		}
 	}
-	ft_draw_line(&var->img, var->player.point, point, RED);
-	return (sqrt(pow(var->player.point.x - point.x, 2)
-			+ pow(var->player.point.y - point.y, 2)));
+	return (hit_point);
+}
+
+t_ray	ft_ray(t_var *var, double ray_angle)
+{
+	t_point	delta_point;
+	t_point	hit_point;
+	t_ray	ray;
+
+	delta_point = ft_ray_delta(var, ray_angle);
+	hit_point = ft_ray_hit(var, delta_point, &ray);
+	ft_draw_line(&var->img, var->player.point, hit_point, RED);
+	ray.dist = sqrt(pow(var->player.point.x - hit_point.x, 2)
+			+ pow(var->player.point.y - hit_point.y, 2));
+	return (ray);
 }

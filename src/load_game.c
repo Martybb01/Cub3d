@@ -6,7 +6,7 @@
 /*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:42:19 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/27 14:02:04 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/08/03 14:38:42 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,24 +77,35 @@ t_point	ft_opp_point(t_point point)
 
 void	ft_ray_casting(t_var *var)
 {
-	double	angle;
-	double	delta_angle = FOV / WIDTH;
-	double	dist;
+	double	ray_angle;
+	double	delta_angle;
 	t_point	point;
+	t_ray	ray;
 
 	point.x = 0;
-	angle = -1 * (FOV / 2);
-	printf("delta_angle = %f\n", delta_angle);
+	ray_angle = -1 * (FOV / 2);
+	delta_angle = FOV / WIDTH;
 	while (point.x < WIDTH)
 	{
-		dist = ft_ray(var, angle) * cos(angle * M_PI / 180);
-		angle = angle + delta_angle;
+		ray = ft_ray(var, ray_angle);
+		point.y = HEIGHT / 2 + (TILESIZE * HEIGHT)
+			/ (ray.dist * cos(ray_angle * M_PI / 180));
+		if ((int )point.x % 6 == 0)
+		{
+			if (ray.side == NORTH)
+				ft_draw_line(&var->img, point, ft_opp_point(point), GREEN);
+			else if (ray.side == SOUTH)
+				ft_draw_line(&var->img, point, ft_opp_point(point), DARK_GREEN);
+			else if (ray.side == EAST)
+				ft_draw_line(&var->img, point, ft_opp_point(point), LIGHT_GREEN);
+			else if (ray.side == WEST)
+				ft_draw_line(&var->img, point, ft_opp_point(point), GRAY);
+		}
 		point.x++;
-		point.y = HEIGHT - dist;
-		if ((int )point.x % 10 == 0)
-			ft_draw_line(&var->img, point, ft_opp_point(point), GREEN);
+		ray_angle = ray_angle + delta_angle;
 	}
 }
+
 
 void	ft_ceiling(t_var *var, int color)
 {
