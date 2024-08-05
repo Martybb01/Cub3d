@@ -6,7 +6,7 @@
 /*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:49:39 by fdonati           #+#    #+#             */
-/*   Updated: 2024/08/04 11:40:47 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/08/05 18:55:50 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	ft_blank_line(char *line)
 	return (0);
 }
 
+//TODO: norminette me plz
 int	ft_parse_color(char *line, t_rgb *color)
 {
 	char	*tmp;
@@ -53,7 +54,7 @@ int	ft_parse_color(char *line, t_rgb *color)
 	color->r = ft_atoi(rgb[0]);
 	color->g = ft_atoi(rgb[1]);
 	color->b = ft_atoi(rgb[2]);
-	printf("r: %d, g: %d, b: %d\n", color->r, color->g, color->b);
+	//printf("r: %d, g: %d, b: %d\n", color->r, color->g, color->b);
 
 	ft_free_matrix(rgb);
 	free(tmp);
@@ -71,12 +72,9 @@ int	ft_parse_texture(char *line, t_texture *texture, t_var *mlx)
 	len = ft_strlen(tmp);
 	if (len > 0 && tmp[len - 1] == '\n')
 		tmp[len - 1] = '\0';
-	printf("%s\n", tmp);
+	//printf("%s\n", tmp);
 	if (!ft_match_ext(tmp, ".xpm"))
-	{
-		printf("Extension error: %s\n", tmp);
 		ft_err(EXT_ERROR, 1);
-	}
 	if (texture->img)
 	{
 		mlx_destroy_image(mlx, texture->img);
@@ -109,6 +107,7 @@ int ft_check_options(char *line, t_var *var)
 	return (0);
 }
 
+//TODO: norminette me plz
 int	ft_read_map(char *path, t_var *var)
 {
 	int		fd;

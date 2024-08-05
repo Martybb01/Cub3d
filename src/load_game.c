@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   load_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:42:19 by fdonati           #+#    #+#             */
-/*   Updated: 2024/08/03 14:38:42 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/08/05 19:36:19 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/* static void	ft_print_map(t_map map)
-{
-	int	i;
-
-	i = 0;
-	while (map.map[i])
-	{
-		ft_putstr_fd(map.map[i], 1);
-		ft_putchar_fd('\n', 1);
-		i++;
-	}
-} */
 
 void	ft_render_map(t_var *var)
 {
@@ -46,6 +33,7 @@ void	ft_render_map(t_var *var)
 	}
 }
 
+//TODO: ci serve ancora pt.2 ?
 /* void	ft_render_dir(t_var *var)
 {
 	int		x;
@@ -66,55 +54,17 @@ void	ft_render_player(t_var *var)
 	/* ft_render_dir(var); */
 }
 
-t_point	ft_opp_point(t_point point)
-{
-	t_point	opp;
 
-	opp.x = point.x;
-	opp.y = HEIGHT - point.y;
-	return (opp);
-}
-
-void	ft_ray_casting(t_var *var)
-{
-	double	ray_angle;
-	double	delta_angle;
-	t_point	point;
-	t_ray	ray;
-
-	point.x = 0;
-	ray_angle = -1 * (FOV / 2);
-	delta_angle = FOV / WIDTH;
-	while (point.x < WIDTH)
-	{
-		ray = ft_ray(var, ray_angle);
-		point.y = HEIGHT / 2 + (TILESIZE * HEIGHT)
-			/ (ray.dist * cos(ray_angle * M_PI / 180));
-		if ((int )point.x % 6 == 0)
-		{
-			if (ray.side == NORTH)
-				ft_draw_line(&var->img, point, ft_opp_point(point), GREEN);
-			else if (ray.side == SOUTH)
-				ft_draw_line(&var->img, point, ft_opp_point(point), DARK_GREEN);
-			else if (ray.side == EAST)
-				ft_draw_line(&var->img, point, ft_opp_point(point), LIGHT_GREEN);
-			else if (ray.side == WEST)
-				ft_draw_line(&var->img, point, ft_opp_point(point), GRAY);
-		}
-		point.x++;
-		ray_angle = ray_angle + delta_angle;
-	}
-}
-
-
-void	ft_ceiling(t_var *var, int color)
+void	ft_render_ceiling(t_var *var)
 {
 	int	x;
 	int	y;
+	int color;
 
 	y = 0;
 	while (y < HEIGHT / 2)
 	{
+		color = create_trgb(0, var->pars.ceiling.r, var->pars.ceiling.g, var->pars.ceiling.b);
 		x = 0;
 		while (x < WIDTH)
 		{
@@ -125,14 +75,16 @@ void	ft_ceiling(t_var *var, int color)
 	}
 }
 
-void	ft_floor(t_var *var, int color)
+void	ft_render_floor(t_var *var)
 {
 	int	x;
 	int	y;
+	int color;
 
 	y = HEIGHT / 2;
 	while (y < HEIGHT)
 	{
+		color = create_trgb(0, var->pars.floor.r, var->pars.floor.g, var->pars.floor.b);
 		x = 0;
 		while (x < WIDTH)
 		{
@@ -145,11 +97,12 @@ void	ft_floor(t_var *var, int color)
 
 int	ft_load_game(t_var *var)
 {
-	ft_ceiling(var, BLACK);
-	ft_floor(var, BLACK);
+	ft_render_ceiling(var);
+	ft_render_floor(var);
 	ft_render_map(var);
 	ft_render_player(var);
-	ft_ray_casting(var);
+	ft_raycaster(var);
+	//ft_ray_casting(var);
 	mlx_put_image_to_window(var->mlx, var->win, var->img.img, 0, 0);
 	//ft_print_map(var->map);
 	return (0);

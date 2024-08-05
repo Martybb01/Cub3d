@@ -6,7 +6,7 @@
 /*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 16:02:06 by marboccu          #+#    #+#             */
-/*   Updated: 2024/08/04 11:48:03 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/08/05 18:51:22 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,3 +57,16 @@ int create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
+
+/* void	ft_print_map(t_map map)
+{
+	int	i;
+
+	i = 0;
+	while (map.map[i])
+	{
+		ft_putstr_fd(map.map[i], 1);
+		ft_putchar_fd('\n', 1);
+		i++;
+	}
+} */
