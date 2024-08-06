@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_tex_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 18:53:37 by marboccu          #+#    #+#             */
-/*   Updated: 2024/08/05 19:25:07 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:06:12 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void ft_compute_tex_params(t_ray_params *context, t_tex_params *tex_params)
 	wall_dist = ft_compute_wall_dist(context);
 	context->point.y = HEIGHT / 2 + (TILESIZE * HEIGHT) / wall_dist;
 	if (context->point.y < 0)
-        context->point.y = 0;
+		context->point.y = 0;
     if (context->point.y >= HEIGHT)
-        context->point.y = HEIGHT - 1;
+		context->point.y = HEIGHT - 1;
 	ft_compute_wall_intersec(context, tex_params, wall_dist);
 	ft_compute_tex_coord(context, tex_params, wall_dist);
 }

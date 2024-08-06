@@ -6,7 +6,7 @@
 /*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:02:28 by fdonati           #+#    #+#             */
-/*   Updated: 2024/08/03 16:34:30 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/08/06 19:43:32 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,19 @@ t_point	ft_ray_hit(t_var *var, t_point delta_point, t_ray *ray)
 	while (1)
 	{
 		hit_point.x += delta_point.x;
-		if (var->map.map[(int)hit_point.y / TILESIZE]
-			[(int)hit_point.x / TILESIZE] == '1')
+		if (var->map.map[(int)floor(hit_point.y / TILESIZE)]
+			[(int)floor(hit_point.x / TILESIZE)] == '1')
 		{
+			hit_point.x -= delta_point.x;
+			hit_point.x = floor(hit_point.x);
 			ray->side = ft_ray_side_x(delta_point);
 			break ;
 		}
 		hit_point.y += delta_point.y;
-		if (var->map.map[(int)hit_point.y / TILESIZE]
-			[(int)hit_point.x / TILESIZE] == '1')
+		if (var->map.map[(int)floor(hit_point.y / TILESIZE)]
+			[(int)floor(hit_point.x / TILESIZE)] == '1')
 		{
+			hit_point.y = floor(hit_point.y);
 			ray->side = ft_ray_side_y(delta_point);
 			break ;
 		}

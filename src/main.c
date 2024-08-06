@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:51:10 by fdonati           #+#    #+#             */
-/*   Updated: 2024/08/05 19:21:39 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:33:12 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int	main(int argc, char **argv)
 	var.pars = (t_pars){0};
 	ft_check_file(argc, argv[1]);
 	var.path = argv[1];
+	var.mlx = mlx_init();
 	if (ft_read_map(var.path, &var))
 		ft_err(MAP_ERROR, 1);
 	if (!ft_parse_map(&var))
 		ft_err(MAP_ERROR, 1);
-	var.mlx = mlx_init();
 	if (!var.mlx)
 		ft_err(MLX_ERROR, 1);
 	var.win = mlx_new_window(var.mlx, WIDTH, HEIGHT, "cub3d");

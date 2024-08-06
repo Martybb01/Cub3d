@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 18:53:30 by marboccu          #+#    #+#             */
-/*   Updated: 2024/08/05 19:35:14 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:14:33 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ void	ft_ray_casting(t_var *var)
 
 	point.x = 0;
 	ray_angle =  -1 * (FOV / 2);
-	delta_angle = FOV / WIDTH;
+	delta_angle = (double) FOV / WIDTH;
 	while (point.x < WIDTH)
 	{
 		ray = ft_ray(var, ray_angle);
-		point.y = HEIGHT / 2 + (TILESIZE * HEIGHT)
+		point.y = HEIGHT / 2 + ((double) TILESIZE * HEIGHT)
 			/ (ray.dist * cos(ray_angle * M_PI / 180));
 
 		if ((int )point.x % 1 == 0)
@@ -86,5 +86,7 @@ void	ft_ray_casting(t_var *var)
 		}
 		point.x++;
 		ray_angle = ray_angle + delta_angle;
+		if (ray_angle > -3 && ray_angle < 3)
+			printf("ray_angle = %f\n", ray_angle);
 	}
 }

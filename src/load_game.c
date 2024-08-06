@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:42:19 by fdonati           #+#    #+#             */
-/*   Updated: 2024/08/05 19:36:19 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/08/06 19:42:41 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	ft_load_game(t_var *var)
 	ft_render_map(var);
 	ft_render_player(var);
 	ft_raycaster(var);
-	//ft_ray_casting(var);
+	/* ft_ray_casting(var); */
 	mlx_put_image_to_window(var->mlx, var->win, var->img.img, 0, 0);
 	//ft_print_map(var->map);
 	return (0);

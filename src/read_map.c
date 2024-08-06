@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:49:39 by fdonati           #+#    #+#             */
-/*   Updated: 2024/08/05 18:55:50 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:42:04 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_parse_color(char *line, t_rgb *color)
 	return (0);
 }
 
-int	ft_parse_texture(char *line, t_texture *texture, t_var *mlx)
+int	ft_parse_texture(char *line, t_texture *texture, t_var *var)
 {
 	char	*tmp;
 	int len;
@@ -77,10 +77,12 @@ int	ft_parse_texture(char *line, t_texture *texture, t_var *mlx)
 		ft_err(EXT_ERROR, 1);
 	if (texture->img)
 	{
-		mlx_destroy_image(mlx, texture->img);
+		mlx_destroy_image(var->mlx, texture->img);
 		texture->img = NULL;
 	}
-	texture->img = mlx_xpm_file_to_image(mlx, tmp, &texture->width, &texture->height);
+	ft_printf(2, "tmp: %s\n", tmp);
+	texture->img = mlx_xpm_file_to_image(var->mlx, tmp, &texture->width, &texture->height);
+	ft_printf(2, "texture->width: %d, texture->height: %d\n", texture->width, texture->height);
 	free(tmp);
 	if (!texture->img)
 		return (1);
