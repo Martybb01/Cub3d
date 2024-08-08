@@ -33,9 +33,9 @@ void	ft_player_init(t_var *var)
 				if (var->map.map[i][j] == 'S')
 					var->player.dir = 270;
 				if (var->map.map[i][j] == 'E')
-					var->player.dir = 180;
-				if (var->map.map[i][j] == 'W')
 					var->player.dir = 0;
+				if (var->map.map[i][j] == 'W')
+					var->player.dir = 180;
 				var->map.map[i][j] = '0';
 				return ;
 			}

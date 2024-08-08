@@ -16,15 +16,15 @@ void	ft_rotate(t_var *var, int keycode)
 {
 	if (keycode == LEFT)
 	{
-		if (var->player.dir - (1 + SPEED) < 0)
-			var->player.dir = 360 + var->player.dir;
-		var->player.dir -= (1 + SPEED);
-	}
-	if (keycode == RIGHT)
-	{
 		if (var->player.dir + (1 + SPEED) > 360)
 			var->player.dir = var->player.dir - 360;
 		var->player.dir += (1 + SPEED);
+	}
+	if (keycode == RIGHT)
+	{
+		if (var->player.dir - (1 + SPEED) < 0)
+			var->player.dir = 360 + var->player.dir;
+		var->player.dir -= (1 + SPEED);
 	}
 }
 

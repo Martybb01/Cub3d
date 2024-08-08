@@ -18,7 +18,7 @@ void	ft_move_forward(t_var *var, double delta_x, double delta_y)
 		[(int)(var->player.point.x + delta_x) / TILESIZE] == '0')
 	{
 		var->player.point.x += delta_x;
-		var->player.point.y += delta_y;
+		var->player.point.y -= delta_y;
 	}
 }
 
@@ -28,7 +28,7 @@ void	ft_move_backward(t_var *var, double delta_x, double delta_y)
 		[(int)(var->player.point.x - delta_x) / TILESIZE] == '0')
 	{
 		var->player.point.x -= delta_x;
-		var->player.point.y -= delta_y;
+		var->player.point.y += delta_y;
 	}
 }
 
@@ -37,7 +37,7 @@ void	ft_move_left(t_var *var, double delta_x, double delta_y)
 	if (var->map.map[(int)(var->player.point.y - delta_x) / TILESIZE]
 		[(int)(var->player.point.x + delta_y) / TILESIZE] == '0')
 	{
-		var->player.point.x += delta_y;
+		var->player.point.x -= delta_y;
 		var->player.point.y -= delta_x;
 	}
 }
@@ -47,7 +47,7 @@ void	ft_move_right(t_var *var, double delta_x, double delta_y)
 	if (var->map.map[(int)(var->player.point.y + delta_x) / TILESIZE]
 		[(int)(var->player.point.x - delta_y) / TILESIZE] == '0')
 	{
-		var->player.point.x -= delta_y;
+		var->player.point.x += delta_y;
 		var->player.point.y += delta_x;
 	}
 }

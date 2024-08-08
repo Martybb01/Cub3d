@@ -65,7 +65,7 @@ void	ft_ray_casting(t_var *var)
 	t_ray	ray;
 
 	point.x = 0;
-	ray_angle =  -1 * (FOV / 2);
+	ray_angle =  (FOV / 2);
 	delta_angle = (double) FOV / WIDTH;
 	while (point.x < WIDTH)
 	{
@@ -85,7 +85,7 @@ void	ft_ray_casting(t_var *var)
 				ft_draw_line(&var->img, point, ft_opp_point(point), GRAY);
 		}
 		point.x++;
-		ray_angle = ray_angle + delta_angle;
+		ray_angle = ray_angle - delta_angle;
 		if (ray_angle > -3 && ray_angle < 3)
 			printf("ray_angle = %f\n", ray_angle);
 	}

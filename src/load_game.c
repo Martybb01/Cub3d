@@ -101,8 +101,8 @@ int	ft_load_game(t_var *var)
 	ft_render_floor(var);
 	ft_render_map(var);
 	ft_render_player(var);
-	ft_raycaster(var);
-	/* ft_ray_casting(var); */
+	/* ft_raycaster(var); */
+	ft_ray_casting(var);
 	mlx_put_image_to_window(var->mlx, var->win, var->img.img, 0, 0);
 	//ft_print_map(var->map);
 	return (0);
