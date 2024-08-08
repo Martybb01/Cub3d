@@ -110,21 +110,21 @@ t_point	ft_ray_hit(t_var *var, t_point delta_point, t_ray *ray, double dir_angle
 			{
 				hit_round = ceil(hit_point.y);
 				c = hit_round - hit_point.y;
-				if (dir_angle < 90)
+				if (dir_angle <= 90)
 					hit_point.x = hit_point.x - fabs(c * (1 / tan(dir_angle * M_PI / 180)));
-				else if (dir_angle > 90)
+				else if (dir_angle >= 90)
 					hit_point.x = hit_point.x + fabs(c * (1 / tan(dir_angle * M_PI / 180)));
 				hit_point.y = hit_round;
 			}
 			else
 			{
-				hit_round = floor(hit_point.x);
-				c = hit_point.x - hit_round;
-				if (dir_angle < 270)
+				hit_round = floor(hit_point.y);
+				c = hit_point.y - hit_round;
+				if (dir_angle <= 270)
 					hit_point.x = hit_point.x + fabs(c * (1 / tan(dir_angle * M_PI / 180)));
-				else if (dir_angle > 270)
+				else if (dir_angle >= 270)
 					hit_point.x = hit_point.x - fabs(c * (1 / tan(dir_angle * M_PI / 180)));
-				hit_point.x = hit_round;
+				hit_point.y = hit_round;
 			}
 			ray->side = ft_ray_side_y(delta_point);
 			break ;
