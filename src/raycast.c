@@ -57,7 +57,7 @@ t_point	ft_opp_point(t_point point)
 
 
 //TODO: fatta un altra ma sul modello del tuo raycast iniziale, questa x ora boh teniamola qui
-void	ft_ray_casting(t_var *var)
+/* void	ft_ray_casting(t_var *var)
 {
 	double	ray_angle;
 	double	delta_angle;
@@ -89,4 +89,4 @@ void	ft_ray_casting(t_var *var)
 		if (ray_angle > -3 && ray_angle < 3)
 			printf("ray_angle = %f\n", ray_angle);
 	}
-}
+} */

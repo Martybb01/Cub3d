@@ -101,6 +101,7 @@ t_point	ft_ray_hit(t_var *var, t_point delta_point, t_ray *ray, double dir_angle
 				hit_point.x = hit_round;
 			}
 			ray->side = ft_ray_side_x(delta_point);
+			ray->hit_tile = (int)hit_point.y % TILESIZE;
 			break ;
 		}
 		hit_point.y -= delta_point.y;
@@ -127,6 +128,7 @@ t_point	ft_ray_hit(t_var *var, t_point delta_point, t_ray *ray, double dir_angle
 				hit_point.y = hit_round;
 			}
 			ray->side = ft_ray_side_y(delta_point);
+			ray->hit_tile = (int)hit_point.x % TILESIZE;
 			break ;
 		}
 	}
