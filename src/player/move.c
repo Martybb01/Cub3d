@@ -6,7 +6,7 @@
 /*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 16:53:37 by fdonati           #+#    #+#             */
-/*   Updated: 2024/09/02 12:21:10 by freesca          ###   ########.fr       */
+/*   Updated: 2024/09/02 16:49:56 by freesca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_move_forward(t_var *var, double delta_x, double delta_y)
 {
-	if (var->map.map[(int)(var->player.point.y + delta_y) / TILESIZE]
+	if (var->map.map[(int)(var->player.point.y - delta_y) / TILESIZE]
 		[(int)(var->player.point.x + delta_x) / TILESIZE] == '0')
 	{
 		var->player.point.x += delta_x;
@@ -24,7 +24,7 @@ void	ft_move_forward(t_var *var, double delta_x, double delta_y)
 
 void	ft_move_backward(t_var *var, double delta_x, double delta_y)
 {
-	if (var->map.map[(int)(var->player.point.y - delta_y) / TILESIZE]
+	if (var->map.map[(int)(var->player.point.y + delta_y) / TILESIZE]
 		[(int)(var->player.point.x - delta_x) / TILESIZE] == '0')
 	{
 		var->player.point.x -= delta_x;
@@ -35,7 +35,7 @@ void	ft_move_backward(t_var *var, double delta_x, double delta_y)
 void	ft_move_left(t_var *var, double delta_x, double delta_y)
 {
 	if (var->map.map[(int)(var->player.point.y - delta_x) / TILESIZE]
-		[(int)(var->player.point.x + delta_y) / TILESIZE] == '0')
+		[(int)(var->player.point.x - delta_y) / TILESIZE] == '0')
 	{
 		var->player.point.x -= delta_y;
 		var->player.point.y -= delta_x;
@@ -45,7 +45,7 @@ void	ft_move_left(t_var *var, double delta_x, double delta_y)
 void	ft_move_right(t_var *var, double delta_x, double delta_y)
 {
 	if (var->map.map[(int)(var->player.point.y + delta_x) / TILESIZE]
-		[(int)(var->player.point.x - delta_y) / TILESIZE] == '0')
+		[(int)(var->player.point.x + delta_y) / TILESIZE] == '0')
 	{
 		var->player.point.x += delta_y;
 		var->player.point.y += delta_x;

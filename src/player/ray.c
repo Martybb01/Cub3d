@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:02:28 by fdonati           #+#    #+#             */
-/*   Updated: 2024/08/03 16:34:30 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/09/02 16:43:18 by freesca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,6 @@ t_ray	ft_ray(t_var *var, double ray_angle)
 		dir_angle -= 360;
 	delta_point = ft_ray_delta(dir_angle);
 	hit_point = ft_ray_hit(var, delta_point, &ray, dir_angle);
-	ft_draw_line(&var->img, var->player.point, hit_point, RED);
 	ray.dist = sqrt(pow(var->player.point.x - hit_point.x, 2)
 			+ pow(var->player.point.y - hit_point.y, 2));
 	return (ray);

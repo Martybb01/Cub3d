@@ -6,7 +6,7 @@
 /*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:13:01 by freesca           #+#    #+#             */
-/*   Updated: 2024/09/02 12:39:29 by freesca          ###   ########.fr       */
+/*   Updated: 2024/09/02 16:38:04 by freesca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	ft_key_press(int keycode, t_var *var)
 		var->player.rot = 1;
 	if (keycode == RIGHT)
 		var->player.rot = -1;
+	if (keycode == M)
+		var->map.show = 1;
 	return (0);
 }
 
@@ -45,6 +47,8 @@ int    ft_key_release(int keycode, t_var *var)
 		var->player.rot = 0;
 	if (keycode == RIGHT)
 		var->player.rot = 0;
+	if (keycode == M)
+		var->map.show = 0;
 	return (0);
 }
 
