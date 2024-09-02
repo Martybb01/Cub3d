@@ -1,66 +1,69 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.c                                          :+:      :+:    :+:   */
+/*   raycast2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 18:53:30 by marboccu          #+#    #+#             */
-/*   Updated: 2024/08/06 17:14:33 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/09/02 11:20:31 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void ft_draw_texture(t_var *var, t_ray *ray, t_tex_params *tex_params)
+int	ft_tex_color(t_texture texture, t_point tex)
 {
-	if (ray->side == NORTH)
-		ft_draw_tex(&var->img, tex_params->start, tex_params->end, &var->pars.no, tex_params->tex_x);
-	else if (ray->side == SOUTH)
-		ft_draw_tex(&var->img, tex_params->start, tex_params->end, &var->pars.so, tex_params->tex_x);
-	else if (ray->side == EAST)
-		ft_draw_tex(&var->img, tex_params->start, tex_params->end, &var->pars.ea, tex_params->tex_x);
-	else if (ray->side == WEST)
-		ft_draw_tex(&var->img, tex_params->start, tex_params->end, &var->pars.we, tex_params->tex_x);
+	int	color;
+	int	x;
+	int	y;
+
+	x = (int)tex.x;
+	y = (int)tex.y;
+
+	if (x < 0 || x >= texture.width || y < 0 || y >= texture.height)
+		return (0);
+	color = *(int *)(texture.addr + (y * texture.line_length + x * (texture.bpp / 8)));
+	return (color);
 }
 
-void ft_raycaster(t_var *var)
+t_texture	ft_define_texture(t_var *var, t_ray ray)
 {
-	t_ray_params context;
-	t_tex_params tex_params;
-	
-	context.var = var;
-	context.point.x = 0;
-	context.ray_angle = -1 - (FOV / 2);
-	context.delta_angle = FOV / WIDTH;
+	if (ray.side == NORTH)
+		return (var->pars.no);
+	else if (ray.side == SOUTH)
+		return (var->pars.so);
+	else if (ray.side == EAST)
+		return (var->pars.ea);
+	else
+		return (var->pars.we);
+}
 
-	while (context.point.x < WIDTH)
+void    ft_draw_texture2(t_var *var, int x, t_ray ray, int wall_height)
+{
+	t_point		tex;
+	t_texture	texture;
+	int			y;
+    double		scale;
+
+	texture = ft_define_texture(var, ray);
+	scale = (double)texture.height / wall_height;
+	tex.x = ((double)ray.hit_tile / TILESIZE) * texture.width;
+	tex.y = 0;
+	y = HEIGHT / 2 - wall_height / 2;
+	while (y < (HEIGHT / 2 + wall_height / 2))
 	{
-		context.ray = ft_ray(context.var, context.ray_angle);
-		ft_compute_tex_params(&context, &tex_params);
-
-		if ((int)context.point.x % 1 == 0)
-			ft_draw_texture(var, &context.ray, &tex_params);
-		context.point.x++;
-		context.ray_angle = context.ray_angle + context.delta_angle;
+		ft_draw_pixel(&var->img, x, y, ft_tex_color(texture, tex));
+		tex.y += scale;
+		y += 1;
 	}
 }
 
-t_point	ft_opp_point(t_point point)
-{
-	t_point	opp;
-
-	opp.x = point.x;
-	opp.y = HEIGHT - point.y;
-	return (opp);
-}
-
-
-//TODO: fatta un altra ma sul modello del tuo raycast iniziale, questa x ora boh teniamola qui
-/* void	ft_ray_casting(t_var *var)
+void	ft_ray_casting(t_var *var)
 {
 	double	ray_angle;
 	double	delta_angle;
+    int     wall_height;
 	t_point	point;
 	t_ray	ray;
 
@@ -72,21 +75,9 @@ t_point	ft_opp_point(t_point point)
 		ray = ft_ray(var, ray_angle);
 		point.y = HEIGHT / 2 + ((double) TILESIZE * HEIGHT)
 			/ (ray.dist * cos(ray_angle * M_PI / 180));
-
-		if ((int )point.x % 1 == 0)
-		{
-			if (ray.side == NORTH)
-				ft_draw_line(&var->img, point, ft_opp_point(point), GREEN);
-			else if (ray.side == SOUTH)
-				ft_draw_line(&var->img, point, ft_opp_point(point), BLACK);
-			else if (ray.side == EAST)
-				ft_draw_line(&var->img, point, ft_opp_point(point), YELLOW);
-			else if (ray.side == WEST)
-				ft_draw_line(&var->img, point, ft_opp_point(point), GRAY);
-		}
+        wall_height = (TILESIZE * HEIGHT) / (ray.dist * cos(ray_angle * M_PI / 180));
+		ft_draw_texture2(var, (int)point.x, ray, wall_height);
 		point.x++;
 		ray_angle = ray_angle - delta_angle;
-		if (ray_angle > -3 && ray_angle < 3)
-			printf("ray_angle = %f\n", ray_angle);
 	}
-} */
+}
