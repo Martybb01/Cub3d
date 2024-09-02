@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.c                                          :+:      :+:    :+:   */
+/*   raycast2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 18:53:30 by marboccu          #+#    #+#             */
-/*   Updated: 2024/08/06 17:14:33 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/09/02 11:19:12 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ void    ft_draw_texture2(t_var *var, int x, t_ray ray, int wall_height)
 	scale = (double)texture.height / wall_height;
 	tex.x = ((double)ray.hit_tile / TILESIZE) * texture.width;
 	tex.y = 0;
-	y = HEIGHT / 2 + wall_height / 2;
-	while (y > (HEIGHT / 2 - wall_height / 2))
+	y = (HEIGHT / 2 - wall_height / 2);
+	while (y < (HEIGHT / 2 + wall_height / 2))
 	{
 		if (y == HEIGHT / 2)
 			printf("tex.x: %f, tex.y: %f\n", tex.x, tex.y);
 		ft_draw_pixel(&var->img, x, y, ft_tex_color(texture, tex));
 		tex.y += scale;
-		y -= 1;
+		y += 1;
 	}
 }
 
