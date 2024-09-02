@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:51:10 by fdonati           #+#    #+#             */
-/*   Updated: 2024/08/06 14:33:12 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/09/02 12:14:00 by freesca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void	ft_player_init(t_var *var)
 			if (var->map.map[i][j] == 'N' || var->map.map[i][j] == 'S'
 				|| var->map.map[i][j] == 'E' || var->map.map[i][j] == 'W')
 			{
+				var->player.move_x = 0;
+				var->player.move_y = 0;
+				var->player.rot = 0;
 				var->player.point.x = j * TILESIZE;
 				var->player.point.y = i * TILESIZE;
 				if (var->map.map[i][j] == 'N')
@@ -65,7 +68,7 @@ int	main(int argc, char **argv)
 	var.img.img = mlx_new_image(var.mlx, WIDTH, HEIGHT);
 	var.img.addr = mlx_get_data_addr(var.img.img, &var.img.bpp, &var.img.line_length, &var.img.endian);
 	ft_player_init(&var);
-	mlx_hook(var.win, 2, 1L << 0, &ft_key_press, &var);
+	ft_key_handler(&var);
 	mlx_loop_hook(var.mlx, &ft_load_game, &var);
 	mlx_loop(var.mlx);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 16:53:37 by fdonati           #+#    #+#             */
-/*   Updated: 2024/07/28 17:11:00 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/09/02 12:21:10 by freesca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,19 @@ void	ft_move_right(t_var *var, double delta_x, double delta_y)
 	}
 }
 
-void	ft_move(t_var *var, int keycode)
+void	ft_move(t_var *var)
 {
 	double	delta_x;
 	double	delta_y;
 
 	delta_x = cos(var->player.dir * M_PI / 180) * SPEED;
 	delta_y = sin(var->player.dir * M_PI / 180) * SPEED;
-	if (keycode == W)
+	if (var->player.move_x == 1)
 		ft_move_forward(var, delta_x, delta_y);
-	if (keycode == S)
+	if (var->player.move_x == -1)
 		ft_move_backward(var, delta_x, delta_y);
-	if (keycode == A)
+	if (var->player.move_y == 1)
 		ft_move_left(var, delta_x, delta_y);
-	if (keycode == D)
+	if (var->player.move_y == -1)
 		ft_move_right(var, delta_x, delta_y);
 }

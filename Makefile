@@ -11,6 +11,21 @@ MINILIBX    = mlx/libmlx.a
 
 SRC_DIR		= src
 SRCS		:= /main.c \
+			/load_game.c \
+			/read_map.c \
+			/parsing.c \
+			/utils.c \
+			/key_press.c \
+			/error.c \
+			/raycast.c \
+			/raycast2.c \
+			/raycast_tex_utils.c \
+			/minimap/draw_pixel.c \
+			/minimap/draw_line.c \
+			/minimap/draw_tile.c \
+			/minimap/draw_textures.c \
+			/player/ray.c \
+			/player/move.c \
 
 SRCS_FINAL = $(addprefix $(SRC_DIR), $(SRCS))
 

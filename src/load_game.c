@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:42:19 by fdonati           #+#    #+#             */
-/*   Updated: 2024/08/06 19:42:41 by fdonati          ###   ########.fr       */
+/*   Updated: 2024/09/02 12:18:14 by freesca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	ft_render_floor(t_var *var)
 
 int	ft_load_game(t_var *var)
 {
+	ft_load_player(var);
 	ft_render_ceiling(var);
 	ft_render_floor(var);
 	ft_render_map(var);
