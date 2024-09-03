@@ -6,46 +6,13 @@
 /*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:51:10 by fdonati           #+#    #+#             */
-/*   Updated: 2024/09/03 16:41:20 by freesca          ###   ########.fr       */
+/*   Updated: 2024/09/03 19:19:29 by freesca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 //TODO: norminette me plz
-void	ft_player_init(t_var *var)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < var->map.height)
-	{
-		j = -1;
-		while (++j < (int )ft_strlen(var->map.map[i]))
-		{
-			if (var->map.map[i][j] == 'N' || var->map.map[i][j] == 'S'
-				|| var->map.map[i][j] == 'E' || var->map.map[i][j] == 'W')
-			{
-				var->player.move_x = 0;
-				var->player.move_y = 0;
-				var->player.rot = 0;
-				var->player.point.x = j * TILESIZE;
-				var->player.point.y = i * TILESIZE;
-				if (var->map.map[i][j] == 'N')
-					var->player.dir = 90;
-				if (var->map.map[i][j] == 'S')
-					var->player.dir = 270;
-				if (var->map.map[i][j] == 'E')
-					var->player.dir = 0;
-				if (var->map.map[i][j] == 'W')
-					var->player.dir = 180;
-				var->map.map[i][j] = '0';
-				return ;
-			}
-		}
-	}
-}
 
 int	main(int argc, char **argv)
 {
