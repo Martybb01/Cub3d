@@ -6,7 +6,7 @@
 /*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 16:02:06 by marboccu          #+#    #+#             */
-/*   Updated: 2024/08/05 18:51:22 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:09:09 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,21 @@ void ft_trim_leadblank(char *str)
 int create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+int ft_check_unique_player(char *row)
+{
+	int i;
+	int player_count;
+
+	i = -1;
+	player_count = 0;
+	while (row[++i])
+	{
+		if (ft_strchr("NSWE", row[i]))
+			player_count++;
+	}
+	return (player_count);
 }
 
 /* void	ft_print_map(t_map map)

@@ -6,7 +6,7 @@
 /*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 16:00:06 by marboccu          #+#    #+#             */
-/*   Updated: 2024/07/28 19:48:23 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:08:58 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int ft_check_middles(char *row)
 {
 	int i;
 	int len;
+	static int player_count = 0;
 
 	len = ft_real_rowlen(row);
 	if (row[0] != '1' || row[len - 1] != '1')
@@ -55,6 +56,9 @@ int ft_check_middles(char *row)
 				return (0);
 		}
 	}
+	player_count += ft_check_unique_player(row);
+	if (player_count > 1)
+		return (0);
 	return (1);
 }
 
