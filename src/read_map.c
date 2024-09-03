@@ -6,7 +6,7 @@
 /*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:49:39 by fdonati           #+#    #+#             */
-/*   Updated: 2024/09/02 18:20:27 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:39:37 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	ft_parse_color(char *line, t_rgb *color)
 	len = ft_strlen(tmp);
 	if (len > 0 && tmp[len - 1] == '\n')
 		tmp[len - 1] = '\0';
-	printf("%s\n", tmp);
 	rgb = ft_split(tmp, ',');
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
 		ft_err(BAD_COLOR, 1);
@@ -77,12 +76,10 @@ int	ft_parse_texture(char *line, t_texture *texture, t_var *var)
 		mlx_destroy_image(var->mlx, texture->img);
 		texture->img = NULL;
 	}
-	ft_printf(2, "tmp: %s\n", tmp);
-	//texture->img = mlx_xpm_file_to_image(var->mlx, tmp, &texture->width, &texture->height);
-	texture->img = mlx_png_file_to_image(var->mlx, tmp, &texture->width, &texture->height);
+	texture->img = mlx_xpm_file_to_image(var->mlx, tmp, &texture->width, &texture->height);
 	 if (!texture->img)
     {
-        ft_printf(2, "Error loading PNG file: %s\n", tmp);
+        ft_printf(2, "Error loading XPM file: %s\n", tmp);
         free(tmp);
         return (1);
     }

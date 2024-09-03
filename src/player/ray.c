@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:02:28 by fdonati           #+#    #+#             */
-/*   Updated: 2024/09/02 16:43:18 by freesca          ###   ########.fr       */
+/*   Updated: 2024/09/03 12:39:07 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ t_side	ft_ray_side_x(t_point delta_point)
 t_side	ft_ray_side_y(t_point delta_point)
 {
 	if (delta_point.y > 0)
-		return (SOUTH);
-	else
 		return (NORTH);
+	else
+		return (SOUTH);
 }
 
 int	ft_hit_wall(t_var *var, t_point hit_point, t_point delta_point)
