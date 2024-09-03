@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 16:02:06 by marboccu          #+#    #+#             */
-/*   Updated: 2024/09/03 13:09:09 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:40:34 by freesca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int	ft_check_file(int ac, char *file)
 	else if (!ft_match_ext(file, ".cub"))
 		ft_err(EXT_ERROR, 1);
 	return (0);
-} 
+}
 
-void ft_trim_leadblank(char *str)
+void	ft_trim_leadblank(char *str)
 {
-	char *start;
+	char	*start;
 
 	start = str;
 	while (*start && ft_isspace(*start))
@@ -53,15 +53,15 @@ void ft_trim_leadblank(char *str)
 		ft_memmove(str, start, ft_strlen(start) + 1);
 }
 
-int create_trgb(int t, int r, int g, int b)
+int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int ft_check_unique_player(char *row)
+int	ft_check_unique_player(char *row)
 {
-	int i;
-	int player_count;
+	int	i;
+	int	player_count;
 
 	i = -1;
 	player_count = 0;

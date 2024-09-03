@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:42:19 by fdonati           #+#    #+#             */
-/*   Updated: 2024/09/02 18:17:28 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:29:55 by freesca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ void	ft_render_ceiling(t_var *var)
 {
 	int	x;
 	int	y;
-	int color;
+	int	color;
 
 	y = 0;
 	while (y < HEIGHT / 2)
 	{
-		color = create_trgb(0, var->pars.ceiling.r, var->pars.ceiling.g, var->pars.ceiling.b);
+		color = create_trgb(0, var->pars.ceiling.r, var->pars.ceiling.g,
+				var->pars.ceiling.b);
 		x = 0;
 		while (x < WIDTH)
 		{
@@ -61,12 +62,13 @@ void	ft_render_floor(t_var *var)
 {
 	int	x;
 	int	y;
-	int color;
+	int	color;
 
 	y = HEIGHT / 2;
 	while (y < HEIGHT)
 	{
-		color = create_trgb(0, var->pars.floor.r, var->pars.floor.g, var->pars.floor.b);
+		color = create_trgb(0, var->pars.floor.r, var->pars.floor.g,
+				var->pars.floor.b);
 		x = 0;
 		while (x < WIDTH)
 		{

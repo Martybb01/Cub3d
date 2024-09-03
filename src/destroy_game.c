@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   destroy_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:44:33 by marboccu          #+#    #+#             */
-/*   Updated: 2024/09/02 17:53:14 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:28:37 by freesca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int ft_free_map(char **map, int height)
+int	ft_free_map(char **map, int height)
 {
 	int	i;
 
@@ -24,7 +24,7 @@ int ft_free_map(char **map, int height)
 	return (0);
 }
 
-int ft_free_all(t_var *var)
+int	ft_free_all(t_var *var)
 {
 	if (var->map.map)
 	{
@@ -44,7 +44,7 @@ int ft_free_all(t_var *var)
 	return (0);
 }
 
-int ft_destroy_game(t_var *var)
+int	ft_destroy_game(t_var *var)
 {
 	if (var->mlx && var->win)
 	{

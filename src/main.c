@@ -6,12 +6,13 @@
 /*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:51:10 by fdonati           #+#    #+#             */
-/*   Updated: 2024/09/02 12:14:00 by freesca          ###   ########.fr       */
+/*   Updated: 2024/09/03 16:41:20 by freesca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+//TODO: norminette me plz
 void	ft_player_init(t_var *var)
 {
 	int	i;
@@ -66,7 +67,8 @@ int	main(int argc, char **argv)
 	if (!var.win)
 		ft_err(WIN_ERROR, 1);
 	var.img.img = mlx_new_image(var.mlx, WIDTH, HEIGHT);
-	var.img.addr = mlx_get_data_addr(var.img.img, &var.img.bpp, &var.img.line_length, &var.img.endian);
+	var.img.addr = mlx_get_data_addr(var.img.img, &var.img.bpp,
+					&var.img.line_length, &var.img.endian);
 	ft_player_init(&var);
 	ft_key_handler(&var);
 	mlx_loop_hook(var.mlx, &ft_load_game, &var);
