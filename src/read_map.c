@@ -6,7 +6,7 @@
 /*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:49:39 by fdonati           #+#    #+#             */
-/*   Updated: 2024/09/03 19:16:30 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/09/03 19:29:04 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,39 +44,56 @@ int	ft_check_options(char *line, t_var *var)
 	return (0);
 }
 
+int ft_validate_line(char *line, t_var *var, char **buffer, int *i)
+{
+    if (ft_check_options(line, var) == 1)
+        return (ft_err(BAD_OPTION, 1));
+
+    if (ft_blank_line(line))
+        (*i)++;
+
+    if (*i > 6)
+    {
+        *buffer = ft_strfjoin(*buffer, line);
+        int line_length = ft_strlen(line);
+        if (line_length > var->map.width)
+            var->map.width = line_length;
+        var->map.height++;
+    }
+    return (0);
+}
+
+int ft_process_lines(int fd, t_var *var, char **buffer)
+{
+    char *line;
+    int i = 0;
+
+    while (1)
+    {
+        line = ft_get_next_line(fd);
+        if (!line)
+            break;
+
+        if (ft_validate_line(line, var, buffer, &i) != 0)
+            return (free(line), 1);
+        free(line);
+    }
+
+    return 0;
+}
+
 //TODO: norminette me plz
 int	ft_read_map(char *path, t_var *var)
 {
 	int		fd;
-	char	*line;
 	char	*buffer;
-	int		i;
-	int		line_length;
 
-	i = 0;
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (ft_err(FILE_ERROR, 1));
 	buffer = ft_strdup("");
-	while (1)
-	{
-		line = ft_get_next_line(fd);
-		if (!line)
-			break ;
-		if (ft_check_options(line, var) == 1)
-			return (ft_err(BAD_OPTION, 1));
-		if (ft_blank_line(line))
-			i++;
-		if (i > 6)
-		{
-			buffer = ft_strfjoin(buffer, line);
-			line_length = ft_strlen(line);
-			if (line_length > var->map.width)
-				var->map.width = line_length;
-			var->map.height++;
-		}
-		free(line);
-	}
+	if (ft_process_lines(fd, var, &buffer) != 0)
+		return (free(buffer), 1);
 	close(fd);
 	var->map.map = ft_split(buffer, '\n');
 	free(buffer);
