@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:13:01 by freesca           #+#    #+#             */
-/*   Updated: 2024/09/03 16:29:21 by freesca          ###   ########.fr       */
+/*   Updated: 2024/09/04 12:30:43 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_key_press(int keycode, t_var *var)
 {
 	if (keycode == ESC)
-		ft_destroy_game(var);
+		ft_destroy_game(var, 0);
 	if (keycode == W)
 		var->player.move_x = 1;
 	if (keycode == S)
@@ -54,7 +54,6 @@ int	ft_key_release(int keycode, t_var *var)
 
 void	ft_key_handler(t_var *var)
 {
-	mlx_hook(var->win, 17, 0, &ft_destroy_game, var);
 	mlx_hook(var->win, 2, 1L << 0, &ft_key_press, var);
 	mlx_hook(var->win, 3, 1L << 1, &ft_key_release, var);
 }

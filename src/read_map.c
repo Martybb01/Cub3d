@@ -6,7 +6,7 @@
 /*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:49:39 by fdonati           #+#    #+#             */
-/*   Updated: 2024/09/03 19:29:04 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:05:41 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_check_options(char *line, t_var *var)
 int ft_validate_line(char *line, t_var *var, char **buffer, int *i)
 {
     if (ft_check_options(line, var) == 1)
-        return (ft_err(BAD_OPTION, 1));
+        return (ft_err(BAD_OPTION), 1);
 
     if (ft_blank_line(line))
         (*i)++;
@@ -90,7 +90,7 @@ int	ft_read_map(char *path, t_var *var)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (ft_err(FILE_ERROR, 1));
+		return (ft_err(FILE_ERROR), 1);
 	buffer = ft_strdup("");
 	if (ft_process_lines(fd, var, &buffer) != 0)
 		return (free(buffer), 1);

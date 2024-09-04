@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 16:02:06 by marboccu          #+#    #+#             */
-/*   Updated: 2024/09/03 16:40:34 by freesca          ###   ########.fr       */
+/*   Updated: 2024/09/04 12:25:00 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	ft_check_file(int ac, char *file)
 {
 	(void)file;
 	if (ac != 2)
-		ft_err(BAD_ARG, 1);
+		return (ft_err(BAD_ARG), 1);
 	else if (!ft_match_ext(file, ".cub"))
-		ft_err(EXT_ERROR, 1);
+		return (ft_err(EXT_ERROR), 1);
 	return (0);
 }
 

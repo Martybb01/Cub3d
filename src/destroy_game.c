@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:44:33 by marboccu          #+#    #+#             */
-/*   Updated: 2024/09/03 16:28:37 by freesca          ###   ########.fr       */
+/*   Updated: 2024/09/04 12:31:20 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,16 @@ int	ft_free_all(t_var *var)
 	return (0);
 }
 
-int	ft_destroy_game(t_var *var)
+int	ft_destroy_game(t_var *var, int err_code)
 {
+	ft_free_all(var);
 	if (var->mlx && var->win)
-	{
 		mlx_destroy_window(var->mlx, var->win);
-		exit(0);
-	}
 	if (var->mlx)
 	{
 		// mlx_destroy_display(var->mlx);
 		// mlx_loop_end(var->mlx);
 		free(var->mlx);
 	}
-	ft_free_all(var);
-	exit(0);
+	exit(err_code);
 }
