@@ -6,7 +6,7 @@
 /*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:44:33 by marboccu          #+#    #+#             */
-/*   Updated: 2024/09/04 12:31:20 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:34:56 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,10 @@ int	ft_destroy_game(t_var *var, int err_code)
 		free(var->mlx);
 	}
 	exit(err_code);
+}
+
+int quit_game(t_var *var)
+{
+	ft_destroy_game(var, 0);
+	return (0);
 }

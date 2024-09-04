@@ -6,7 +6,7 @@
 /*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:13:01 by freesca           #+#    #+#             */
-/*   Updated: 2024/09/04 12:30:43 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:36:59 by marboccu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	ft_key_release(int keycode, t_var *var)
 
 void	ft_key_handler(t_var *var)
 {
+	mlx_hook(var->win, 17, 1L << 17, &quit_game, var);
 	mlx_hook(var->win, 2, 1L << 0, &ft_key_press, var);
 	mlx_hook(var->win, 3, 1L << 1, &ft_key_release, var);
 }
