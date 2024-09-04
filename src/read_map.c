@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:49:39 by fdonati           #+#    #+#             */
-/*   Updated: 2024/09/04 12:05:41 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:56:46 by freesca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,14 @@ int ft_validate_line(char *line, t_var *var, char **buffer, int *i)
 
     if (*i > 6)
     {
-        *buffer = ft_strfjoin(*buffer, line);
-        int line_length = ft_strlen(line);
-        if (line_length > var->map.width)
-            var->map.width = line_length;
-        var->map.height++;
+		if (ft_blank_line(line))
+		{
+        	*buffer = ft_strfjoin(*buffer, line);
+        	int line_length = ft_strlen(line);
+        	if (line_length > var->map.width)
+          	var->map.width = line_length;
+        	var->map.height++;
+		}
     }
     return (0);
 }
