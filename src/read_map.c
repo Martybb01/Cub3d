@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: freesca <freesca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:49:39 by fdonati           #+#    #+#             */
-/*   Updated: 2024/09/04 18:56:46 by freesca          ###   ########.fr       */
+/*   Updated: 2024/09/09 15:46:12 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ static int	ft_blank_line(char *line)
 
 int	ft_check_options(char *line, t_var *var)
 {
-	if (line[0] == 'F')
+	ft_printf(1, "line: %s\n", line);
+	if (line[0] == 'F' && line[1] == ' ')
 		return (ft_parse_color(line, &var->pars.floor));
-	if (line[0] == 'C')
+	if (line[0] == 'C' && line[1] == ' ')
 		return (ft_parse_color(line, &var->pars.ceiling));
 	if (line[0] == 'N' && line[1] == 'O')
 		return (ft_parse_texture(line, &var->pars.no, var));
@@ -41,13 +42,16 @@ int	ft_check_options(char *line, t_var *var)
 		return (ft_parse_texture(line, &var->pars.we, var));
 	if (line[0] == 'E' && line[1] == 'A')
 		return (ft_parse_texture(line, &var->pars.ea, var));
-	return (0);
+	return (1);
 }
 
 int ft_validate_line(char *line, t_var *var, char **buffer, int *i)
 {
-    if (ft_check_options(line, var) == 1)
-        return (ft_err(BAD_OPTION), 1);
+	if (ft_blank_line(line) == 1 && *i < 6)
+	{
+    	if (ft_check_options(line, var) == 1)
+        	return (ft_err(BAD_OPTION), 1);
+	}
 
     if (ft_blank_line(line))
         (*i)++;
@@ -85,7 +89,6 @@ int ft_process_lines(int fd, t_var *var, char **buffer)
     return 0;
 }
 
-//TODO: norminette me plz
 int	ft_read_map(char *path, t_var *var)
 {
 	int		fd;
