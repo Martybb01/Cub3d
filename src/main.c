@@ -3,28 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:51:10 by fdonati           #+#    #+#             */
-/*   Updated: 2024/09/04 12:30:09 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/09/09 15:13:29 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//TODO: norminette me plz
+void	ft_init(t_var *var)
+{
+	var->win = NULL;
+	var->img.img = NULL;
+	var->img.addr = NULL;
+	var->mlx = NULL;
+	var->map = (t_map){0};
+	var->player = (t_plyr){0};
+	var->pars = (t_pars){0};
+}
 
 int	main(int argc, char **argv)
 {
 	t_var	var;
 
-	var.win = NULL;
-	var.img.img = NULL;
-	var.img.addr = NULL;
-	var.mlx = NULL;
-	var.map = (t_map){0};
-	var.player = (t_plyr){0};
-	var.pars = (t_pars){0};
+	ft_init(&var);
 	ft_check_file(argc, argv[1]);
 	var.path = argv[1];
 	var.mlx = mlx_init();

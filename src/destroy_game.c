@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marboccu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fdonati <fdonati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:44:33 by marboccu          #+#    #+#             */
-/*   Updated: 2024/09/04 12:34:56 by marboccu         ###   ########.fr       */
+/*   Updated: 2024/09/07 19:03:58 by fdonati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	ft_destroy_game(t_var *var, int err_code)
 		mlx_destroy_window(var->mlx, var->win);
 	if (var->mlx)
 	{
-		// mlx_destroy_display(var->mlx);
-		// mlx_loop_end(var->mlx);
+		mlx_destroy_display(var->mlx);
+		mlx_loop_end(var->mlx);
 		free(var->mlx);
 	}
 	exit(err_code);
