@@ -1,14 +1,14 @@
 F  0,0,255
-NO ./textures/redbrick.png
+NO ./textures/wall.xpm
 
 C 225,30,0
 
-SO ./textures/purplestone.png
+SO ./textures/wall2.xpm
 
-WE ./textures/colorstone.png
+WE ./textures/wall3.xpm
 
 
-EA ./textures/greystone.png
+EA ./textures/wall4.xpm
 
 
 
